@@ -13,3 +13,5 @@ In order to automate, we had to assume certain things:
 3) That there would be exactly the same columns in the data each time
 4) That the column names would remain exactly the same each time
 5) That no other anomalies are introduced into the data
+
+The automation function takes 5 arguments - the three data sources (Wikipedia, Kaggle, and MovieLens) and the two table names to empty data from and write to.
