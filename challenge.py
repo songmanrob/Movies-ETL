@@ -303,7 +303,7 @@ def auto_etl(wiki_data_etl, kaggle_data_etl, ratings_data_etl, table_a, table_b)
     try:
         db_string = f"postgres://postgres:{db_password}@127.0.0.1:5432/movie_data"
         engine = create_engine(db_string)
-        movies_df.to_sql(name='movies', con=engine, if_exists='append')
+        movies_df.to_sql(name=table_a, con=engine, if_exists='append')
     except:
         print("Error loading movies table into PostgreSQL")
     
@@ -314,7 +314,7 @@ def auto_etl(wiki_data_etl, kaggle_data_etl, ratings_data_etl, table_a, table_b)
     try:
         for data in pd.read_csv(f'{file_dir}ratings.csv', chunksize=1000000):
             print(f'importing rows {rows_imported} to {rows_imported + len(data)}...', end='')
-            data.to_sql(name='ratings', con=engine, if_exists='append')
+            data.to_sql(name=table_b, con=engine, if_exists='append')
             rows_imported += len(data)
 
             # add elapsed time to final print out
